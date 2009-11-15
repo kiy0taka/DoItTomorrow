@@ -1,0 +1,29 @@
+body {
+	font-family: Arial;
+	margin: 30px;
+}
+
+a {
+	color:#4183C4;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+.tabNavi {
+	margin: 0px 3px;
+	padding: 5px;
+	float: left;
+	border: 3px solid silver;
+	border-bottom-width: 0px;
+}
+
+.tabPanel {
+	clear: both;
+	text-align: left;
+	background-color: silver;
+	padding: 3px;
+}

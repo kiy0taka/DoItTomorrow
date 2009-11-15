@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/admin/collectTweets.groovy</url>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+  <cron>
+    <url>/admin/collectFavorites.groovy</url>
+    <schedule>every 1 hours</schedule>
+  </cron>
+</cronentries>

@@ -1,0 +1,33 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+
+  <servlet>
+    <servlet-name>GroovletServlet</servlet-name>
+    <servlet-class>groovyx.gaelyk.GaelykServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TemplateServlet</servlet-name>
+    <servlet-class>groovyx.gaelyk.GaelykTemplateServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GroovletServlet</servlet-name>
+    <url-pattern>*.groovy</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TemplateServlet</servlet-name>
+    <url-pattern>*.gtpl</url-pattern>
+  </servlet-mapping>
+
+  <security-constraint>
+    <web-resource-collection>
+      <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <welcome-file-list>
+    <welcome-file>list.groovy</welcome-file>
+  </welcome-file-list>
+</web-app>
