@@ -12,7 +12,7 @@
         <h1 style="text-align:center;">
         <%
           try {
-            def messages = memcacheService.get('favorites')
+            def messages = memcacheService.get('favorites')?.values() as List
             if (messages) {
               out << messages[new Random().nextInt(messages.size())].text
             } else out << '明日やる！'

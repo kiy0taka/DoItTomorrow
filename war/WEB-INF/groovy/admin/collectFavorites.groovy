@@ -12,11 +12,13 @@ try {
     def favorites = new Twitter(cfg.username, cfg.password).getFavorites(page)
     favorites.each { println "${it.text}<br/>" }
 
-    def cache = memcacheService.get('favorites') ?: []
-    cache.addAll(favorites)
+    def cache = memcacheService.get('favorites') ?: [:]
+    if (params.task != null) cache.clear() 
+    favorites.each { cache[it.id] = it }
     memcacheService.put('favorites', cache)
+    println cache.size()
 
-if (favorites && (params.task != null || params.page)) {
+    if (favorites && (params.task != null || params.page)) {
         defaultQueue << [
             countdownMillis: 1000,
             url: '/admin/collectFavorites.groovy',
