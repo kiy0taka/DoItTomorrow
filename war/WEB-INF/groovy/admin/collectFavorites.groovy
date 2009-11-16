@@ -10,11 +10,13 @@ try {
     def cfg = datastoreService.get(KeyFactory.createKey('twitterConfig', 1))
     def page = (params.page ?: '1').toInteger()
     def favorites = new Twitter(cfg.username, cfg.password).getFavorites(page)
-    favorites.each {
-        println "${it.text}<br/>"
-    }
-    memcacheService.put('favorites', favorites)
-    if (favorites && (params.task != null || params.page)) {
+    favorites.each { println "${it.text}<br/>" }
+
+    def cache = memcacheService.get('favorites') ?: []
+    cache.addAll(favorites)
+    memcacheService.put('favorites', cache)
+
+if (favorites && (params.task != null || params.page)) {
         defaultQueue << [
             countdownMillis: 1000,
             url: '/admin/collectFavorites.groovy',
