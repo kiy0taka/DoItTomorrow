@@ -20,7 +20,7 @@ if (favorites && (params.task != null || params.page)) {
         defaultQueue << [
             countdownMillis: 1000,
             url: '/admin/collectFavorites.groovy',
-            taskName: "collectFavorites-page-${++page}",
+            taskName: "collectFavorites-page-${++page}-${new Date().format('yyyyMMddHHmmss')}",
             params:[page: page]
         ]
     }

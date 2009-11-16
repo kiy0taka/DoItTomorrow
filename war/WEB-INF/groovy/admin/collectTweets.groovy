@@ -46,7 +46,7 @@ if (result.tweets && (params.task != null || params.page)) {
     defaultQueue << [
         countdownMillis: 1000,
         url: '/admin/collectTweets.groovy',
-        taskName: "collectTweets-page-$nextPage",
+        taskName: "collectTweets-page-${nextPage}-${new Date().format('yyyyMMddHHmmss')}",
         params:[page: nextPage]
     ]
 }
