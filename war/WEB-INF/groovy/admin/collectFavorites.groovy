@@ -1,15 +1,29 @@
 import com.google.appengine.api.datastore.*
 import twitter4j.Twitter
 
+/*
+  - no param -   : Get 20 most recent favorites.
+  ?task          : Get all favorites using tasks.
+  ?page=[pageNo] : Get requested page favorites. And add task to get next page. 
+ */
 try {
-    def twitterConfig = datastoreService.get(KeyFactory.createKey('twitterConfig', 1))
-    def favorites = new Twitter(twitterConfig.username, twitterConfig.password).getFavorites()
+    def cfg = datastoreService.get(KeyFactory.createKey('twitterConfig', 1))
+    def page = (params.page ?: '1').toInteger()
+    def favorites = new Twitter(cfg.username, cfg.password).getFavorites(page)
     favorites.each {
         println "${it.text}<br/>"
     }
     memcacheService.put('favorites', favorites)
+    if (favorites && (params.task != null || params.page)) {
+        defaultQueue << [
+            countdownMillis: 1000,
+            url: '/admin/collectFavorites.groovy',
+            taskName: "collectFavorites-page-${++page}",
+            params:[page: page]
+        ]
+    }
 } catch (e) {
-    println '<pre>'
+    out << '<pre>'
     e.printStackTrace(out)
-    println '</pre>'
+    out << '</pre>'
 }

@@ -20,9 +20,14 @@ if (request.method == 'POST') {
                         }
                     }
                     fieldset {
-                        legend('Crons')
+                        legend('Cron Jobs')
                         a(href:'collectTweets.groovy', target:'_blank', 'Tweets')
                         a(href:'collectFavorites.groovy', target:'_blank', 'Favorites')
+                    }
+                    fieldset {
+                        legend('Tasks')
+                        a(href:'collectTweets.groovy?task', target:'_blank', 'Tweets')
+                        a(href:'collectFavorites.groovy?task', target:'_blank', 'Favorites')
                     }
                     a(href:userService.createLogoutURL('/'), 'logout')
                 }
