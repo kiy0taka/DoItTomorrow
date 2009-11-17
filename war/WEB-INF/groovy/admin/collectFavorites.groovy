@@ -12,8 +12,13 @@ try {
     def favorites = new Twitter(cfg.username, cfg.password).getFavorites(page)
     favorites.each { println "${it.text}<br/>" }
 
-    def cache = memcacheService.get('favorites') ?: [:]
-    if (params.task != null) cache.clear() 
+    def cache
+    if (params.task != null) {
+        memcacheService.delete('favorites')
+        cache = [:]
+    } else {
+        cache = memcacheService.get('favorites') ?: [:]
+    }
     favorites.each { cache[it.id] = it }
     memcacheService.put('favorites', cache)
     println cache.size()
