@@ -3,6 +3,11 @@ import static com.google.appengine.api.datastore.FetchOptions.Builder.*
 import static com.google.appengine.api.datastore.Query.FilterOperator.*
 import static org.apache.commons.lang.time.DateUtils.*
 
+if (headers['User-Agent'] =~ /MSIE/) {
+    redirect 'ie_not_supported.gtpl'
+    return
+}
+
 def query = new Query('tweet')
 
 // order by timestamp
