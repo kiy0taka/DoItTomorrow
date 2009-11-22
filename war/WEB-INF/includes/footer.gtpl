@@ -2,9 +2,9 @@
         <div style="padding:5px">
         <a href="http://groovy.codehaus.org/">Groovy</a>
         |
-        <a href="http://dl.getdropbox.com/u/132573/Gaelyk-Tutorial.html">Gaelyk</a>
+        <a href="http://gaelyk.appspot.com/">Gaelyk</a>
         |
-        <a href="http://dl.getdropbox.com/u/132573/Gaelyk-Tutorial.html">Gaelyk(日本語)</a>
+        <a href="http://dl.dropbox.com/u/132573/Gaelyk-Home.html">Gaelyk(日本語訳)</a>
         |
         <a href="http://www.jggug.org">JGGUG</a>
         |
