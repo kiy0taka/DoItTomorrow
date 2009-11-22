@@ -3,8 +3,17 @@ import static com.google.appengine.api.datastore.FetchOptions.Builder.*
 import static com.google.appengine.api.datastore.Query.FilterOperator.*
 import static org.apache.commons.lang.time.DateUtils.*
 
+// for Internet Explorer
 if (headers['User-Agent'] =~ /MSIE/) {
-    redirect 'ie_not_supported.gtpl'
+    html.html {
+        head { title '明日やるかも' }
+        body style:'text-align:center; margin-top:100px' {
+            h1 'IEの対応は明日やる'
+            a href:'http://getfirefox.jp/' {
+                img src:'http://getfirefox.jp/b/120x90_1_white'
+            }
+        }
+    }
     return
 }
 
