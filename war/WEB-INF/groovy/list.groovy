@@ -7,10 +7,10 @@ import static org.apache.commons.lang.time.DateUtils.*
 if (headers['User-Agent'] =~ /MSIE/) {
     html.html {
         head { title '明日やるかも' }
-        body style:'text-align:center; margin-top:100px' {
+        body (style:'text-align:center; margin-top:100px') {
             h1 'IEの対応は明日やる'
-            a href:'http://getfirefox.jp/' {
-                img src:'http://getfirefox.jp/b/120x90_1_white'
+            a (href:'http://getfirefox.jp/') {
+                img alt:'Firefoxをインストール', src:'http://getfirefox.jp/b/120x90_1_white', style:'border:0px'
             }
         }
     }
