@@ -23,6 +23,7 @@ if (request.method == 'POST') {
                         legend('Cron Jobs')
                         a(href:'collectTweets.groovy', target:'_blank', 'Tweets')
                         a(href:'collectFavorites.groovy', target:'_blank', 'Favorites')
+                        a(href:'statics.groovy', target:'_blank', 'Statics')
                     }
                     fieldset {
                         legend('Tasks')
