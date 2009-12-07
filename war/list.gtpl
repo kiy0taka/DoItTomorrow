@@ -1,22 +1,6 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
-<%
-def toParams = { override = [:] -> (params + override).findAll { it.value }.collect {"${it.key}=${it.value}"}.join('&') }
-%>
 <div id="tab">
-  <div style="list-style-type:none; clear:both; margin-left: 35px">
-    <div class="tabNavi" ${params.status ? "style='background-color: silver'" : ""}>
-      <a href="list.groovy?${toParams([status:'', page:''])}">すべて</a>
-    </div>
-    <div class="tabNavi" ${params.status == 'today' ? "" : "style='background-color: silver'"}>
-      <a href="list.groovy?${toParams([status:'today', page:''])}">今日やる</a>
-    </div>
-    <div class="tabNavi" ${params.status == 'tomorrow' ? "" : "style='background-color: silver'"}>
-      <a href="list.groovy?${toParams([status:'tomorrow', page:''])}">明日やる</a>
-    </div>
-    <div class="tabNavi" style="background-color: silver">
-      <a href="graph.gtpl">グラフ</a>
-    </div>
-  </div>
+  <% include '/WEB-INF/includes/tabNavi.gtpl' %>
   <div class="tabPanel autopagerize_page_element">
   <%
   def fmt = new java.text.SimpleDateFormat('yyyy/MM/dd HH:mm')
@@ -39,12 +23,12 @@ def toParams = { override = [:] -> (params + override).findAll { it.value }.coll
 </div>
 <div class="autopagerize_insert_before" style="padding-top:5px">
 <% if ((params.page?:0).toInteger() > 1) { %>
-<a href='list.groovy?${toParams([page:(params.page.toInteger()-1)])}'>« Prev</a>
+<a href='${ViewHelper.toURL('list.groovy', params + [page:(params.page.toInteger()-1)])}'>« Prev</a>
 <% } else { %>
 <span style="color:silver">« Prev</span>
 <% } %>
 <% if (request.hasNext) { %>
-<a href='list.groovy?${toParams([page:(params.page?:1).toInteger()+1])}' rel='next'>Next »</a>
+<a href='${ViewHelper.toURL('list.groovy', params + [page:(params.page?:1).toInteger()+1])}' rel='next'>Next »</a>
 <% } else { %>
 <span style="color:silver">Next »</span>
 <% } %>
